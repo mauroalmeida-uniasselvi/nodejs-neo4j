@@ -1,0 +1,18 @@
+
+services:
+  neo4j:
+    image: neo4j:5.26
+    environment:
+      NEO4J_AUTH: neo4j/uniasselvi
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p uniasselvi 'RETURN 1'"]
+      interval: 5s
+      start_period: 10s
+
+volumes:
+  neo4j_data:
